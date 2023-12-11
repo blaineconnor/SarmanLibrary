@@ -11,7 +11,7 @@ Public Class LibContext
     Protected Overrides Sub OnConfiguring(ByVal optionsBuilder As DbContextOptionsBuilder)
         If Not optionsBuilder.IsConfigured Then
             MyBase.OnConfiguring(optionsBuilder)
-            optionsBuilder.UseSqlServer("Server=DESKTOP-R04PVQ3\SQLEXPRESS01; Initial Catalog=BasicLibrary; Integrated Security=true; TrustServerCertificate=True")
+            optionsBuilder.UseSqlServer("Server=DESKTOP-R04PVQ3\SQLEXPRESS01; Initial Catalog=BasicLibrary; Integrated Security=true; TrustServerCertificate=True; MultipleActiveResultSets=true;")
         End If
     End Sub
 

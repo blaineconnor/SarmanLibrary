@@ -25,7 +25,7 @@ Public Class BookService
     }).ToList()
     End Function
 
-    Public Async Sub AddBook(addBookVM As AddBookVM) Implements IBookService.AddBook
+    Public Sub AddBook(addBookVM As AddBookVM) Implements IBookService.AddBook
         Dim bookRepository = _unitOfWork.GetRepository(Of Book)()
 
         Dim newBook As New Book With {
@@ -38,7 +38,7 @@ Public Class BookService
         }
 
         bookRepository.Add(newBook)
-        Await _unitOfWork.CommitAsync()
+        _unitOfWork.CommitAsync().Wait()
     End Sub
     Public Async Sub UpdateBook(vM As UpdateBookVM) Implements IBookService.UpdateBook
         Dim bookRepository = _unitOfWork.GetRepository(Of Book)()
@@ -58,14 +58,14 @@ Public Class BookService
         End If
     End Sub
 
-    Public Async Sub DeleteBook(bookId As Long) Implements IBookService.DeleteBook
+    Public Sub DeleteBook(bookId As Long) Implements IBookService.DeleteBook
         Dim bookRepository = _unitOfWork.GetRepository(Of Book)()
 
-        Dim bookToDelete = Await bookRepository.GetById(bookId)
+        Dim bookToDelete = bookRepository.GetById(bookId)
 
         If bookToDelete IsNot Nothing Then
             bookRepository.Delete(bookToDelete)
-            Await _unitOfWork.CommitAsync()
+            _unitOfWork.CommitAsync()
         End If
     End Sub
     Public Async Function GetBookById(bookId As Long) As Task(Of BookDTO) Implements IBookService.GetBookById

@@ -17,6 +17,7 @@ Module Program
 
         builder.Services.AddDbContext(Of LibContext)(Sub(options) options.UseSqlServer(connectionString))
 
+        'Dependency Injection
 
         builder.Services.AddScoped(Of IAuthorService, AuthorService)
         builder.Services.AddScoped(Of IBookService, BookService)
