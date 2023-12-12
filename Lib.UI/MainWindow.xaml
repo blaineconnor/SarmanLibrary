@@ -4,18 +4,20 @@
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
     x:Class="MainWindow"
-    Title="MainWindow" MinHeight="800" MinWidth="1000" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
-    <Grid>
+    Title="MainWindow" MinHeight="800" MinWidth="1000" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderBrush="#FF37251C" ActiveGlowColor="#FF674330" InactiveGlowColor="#FF37251C">
+    <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="278"/>
 
-            <ColumnDefinition/>
+            <ColumnDefinition Width="277*"/>
+            <ColumnDefinition Width="415*"/>
         </Grid.ColumnDefinitions>
+        <!--Logo-->
         <Border Background="#d9c6a5" Grid.Column="0" Grid.Row="0">
             <Image Width="250" Height="250" Margin="-25,-25,-25,-25" Source="/SARMAN.png">
                 <Image.Style>
@@ -24,15 +26,15 @@
             </Image>
         </Border>
 
-        <!--Logo ve buton-->
-        <Border Background="#f0e9d9" Grid.Column="1" Grid.Row="0">
+        <!--Topbar-->
+        <Border Background="#f0e9d9" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Image Source="/navbarTop.png"/>
-                <Border Background="#f9f9f9" x:Name="brdTopRight">
+
+                <Border Background="#f9f9f9" x:Name="brdTopRight" Height="35" VerticalAlignment="Bottom">
 
                     <DockPanel Width="90" HorizontalAlignment="Right">
                         <Button Width="30" x:Name="btn_minimalize" Click="btn_minimalize_Click" BorderBrush="#FF37251C" Cursor="Hand" Foreground="#FF37251C">
@@ -59,25 +61,26 @@
 
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Border>
+                        <Border Grid.Column="0">
                             <Border.Background>
-                                <ImageBrush ImageSource=""/>
+                                <ImageBrush ImageSource="/navbarLeft.png"/>
                             </Border.Background>
                         </Border>
-                        <Border>
+                        <Border Grid.Column="1">
                             <Border.Background>
-                                <ImageBrush ImageSource=""/>
+                                <ImageBrush ImageSource="/navbarRight.png"/>
                             </Border.Background>
                         </Border>
 
                     </Grid>
-                    
+
                 </Border>
             </Grid>
         </Border>
 
-        <Border  Background="#99f0e9d9" Grid.Column="0" Grid.Row="1" BorderBrush="#FFF0E9D9" VerticalAlignment="Top" Cursor="Arrow" CornerRadius="0,20,0,0">
-            <StackPanel Height="1080">
+        <!--NavBar-->
+        <Border  Background="#99f0e9d9" Margin="0,5,0,0" Grid.Column="0" Grid.Row="1" BorderBrush="#FFF0E9D9" VerticalAlignment="Top" Cursor="Arrow" CornerRadius="0,20,0,0" Height="860">
+            <StackPanel Height="860" Margin="0,0,33,0">
                 <Button Height="50" Style="{DynamicResource MenuButtons}" BorderBrush="#FF37251C" Cursor="Hand">
                     <DockPanel Height="40" Width="180">
                         <DockPanel.Background>
@@ -110,27 +113,30 @@
                 <StackPanel.Background>
                     <ImageBrush ImageSource="/catPawsSideBar.png"/>
                 </StackPanel.Background>
-                
+
             </StackPanel>
-            
+
 
         </Border>
         <Grid Grid.Row="2">
+            <!--Footer-->
             <Border CornerRadius="0,0,20,0" Background="#f0e9d9">
                 <Border Background="#99f9f9f9" HorizontalAlignment="Center" VerticalAlignment="Bottom"  >
-                <Label Content="v1.0" Background="#F9F9F9" Width="150" Height="30" HorizontalContentAlignment="Center" FontFamily="Chiller" Cursor="Hand" FontSize="24"/>
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Setter Property="Background" Value="#f9f9f9"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#f0e9d9"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
+                    <Label Content="v1.0" Background="#F9F9F9" Width="150" Height="30" HorizontalContentAlignment="Center" FontFamily="Chiller" Cursor="Hand" FontSize="24"/>
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="#f9f9f9"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#f0e9d9"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                </Border>
             </Border>
-            </Border>
+
+
         </Grid>
     </Grid>
 </dx:ThemedWindow>
