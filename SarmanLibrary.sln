@@ -27,7 +27,7 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Lib.API", "Lib.API\Lib.API.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Presentation", "4-Presentation", "{0C36DB80-C340-4A42-A821-88BBD4E44006}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SarmanLibrary.UI", "SarmanLibrary.UI\SarmanLibrary.UI.vbproj", "{8C04FE90-9B2B-4D33-AA5A-1EF9E901DE6A}"
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Lib.UI", "Lib.UI\Lib.UI.vbproj", "{8C04FE90-9B2B-4D33-AA5A-1EF9E901DE6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

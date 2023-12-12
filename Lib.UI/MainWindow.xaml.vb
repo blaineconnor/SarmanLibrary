@@ -1,5 +1,4 @@
-﻿Imports System.Text
-Imports DevExpress.Xpf.Core
+﻿Imports DevExpress.Xpf.Core
 
 ''' <summary>
 ''' Interaction logic for MainWindow.xaml
@@ -22,5 +21,17 @@ Partial Public Class MainWindow
         If (Mouse.LeftButton = MouseButtonState.Pressed) Then
             Me.DragMove()
         End If
+    End Sub
+
+    Private Sub btn_fullScreen_Click(sender As Object, e As RoutedEventArgs)
+        If (WindowState = WindowState.Normal) Then
+            Me.WindowState = WindowState.Maximized
+        Else If (WindowState = WindowState.Maximized) Then
+            Me.WindowState = WindowState.Normal
+        End If
+    End Sub
+
+    Private Sub Border_DpiChanged(sender As Object, e As DpiChangedEventArgs)
+
     End Sub
 End Class
