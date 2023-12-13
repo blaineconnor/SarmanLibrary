@@ -5,7 +5,13 @@
 		<TargetFramework>net7.0-windows</TargetFramework>
 		<RootNamespace>Lib.UI</RootNamespace>
 		<UseWPF>true</UseWPF>
+		<AnalysisLevel>none</AnalysisLevel>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <!--<None Remove="addBook.png" />-->
+	</ItemGroup>
 
 
 
@@ -27,6 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Resource Include="addBook.png" />
 		<Resource Include="navbarTop.png" />
 		<Resource Include="SARMAN.png" />
 		<Resource Include="sağ_üst_close_button.png" />
@@ -42,5 +49,27 @@
 
 
 
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="My Project\Resources.Designer.vb">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="My Project\Resources.resx">
+	    <CustomToolNamespace>My.Resources</CustomToolNamespace>
+	    <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="My Project\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	  </None>
 	</ItemGroup>
 </Project>

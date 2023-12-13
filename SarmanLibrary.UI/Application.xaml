@@ -32,6 +32,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>        
+        </Style>
     </Application.Resources>
 </Application>

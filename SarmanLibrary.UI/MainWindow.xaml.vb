@@ -1,4 +1,5 @@
-﻿Imports DevExpress.Xpf.Core
+﻿Imports System.Text
+Imports DevExpress.Xpf.Core
 
 ''' <summary>
 ''' Interaction logic for MainWindow.xaml
@@ -8,7 +9,6 @@ Partial Public Class MainWindow
     Public Sub New()
         InitializeComponent()
     End Sub
-
     Private Sub btn_kapat_Click(sender As Object, e As RoutedEventArgs)
         Me.Close()
     End Sub
@@ -26,7 +26,7 @@ Partial Public Class MainWindow
     Private Sub btn_fullScreen_Click(sender As Object, e As RoutedEventArgs)
         If (WindowState = WindowState.Normal) Then
             Me.WindowState = WindowState.Maximized
-        Else If (WindowState = WindowState.Maximized) Then
+        ElseIf (WindowState = WindowState.Maximized) Then
             Me.WindowState = WindowState.Normal
         End If
     End Sub
@@ -36,6 +36,6 @@ Partial Public Class MainWindow
     End Sub
 
     Private Sub sideBar_AllBooks_Click(sender As Object, e As RoutedEventArgs)
-        'ucCall.Uc_Add(Content, New AllBooks())
+        ucCall.Uc_Add(MWContent, New AllBooks())
     End Sub
 End Class
