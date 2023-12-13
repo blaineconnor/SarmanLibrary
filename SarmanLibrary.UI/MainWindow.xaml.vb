@@ -1,10 +1,15 @@
-﻿Imports System.Text
+﻿Imports System.Net.Http
+Imports System.Text
 Imports DevExpress.Xpf.Core
 
 ''' <summary>
 ''' Interaction logic for MainWindow.xaml
 ''' </summary>
 Partial Public Class MainWindow
+
+
+
+
     Inherits ThemedWindow
     Public Sub New()
         InitializeComponent()
@@ -38,4 +43,6 @@ Partial Public Class MainWindow
     Private Sub sideBar_AllBooks_Click(sender As Object, e As RoutedEventArgs)
         ucCall.Uc_Add(MWContent, New AllBooks())
     End Sub
+
+
 End Class

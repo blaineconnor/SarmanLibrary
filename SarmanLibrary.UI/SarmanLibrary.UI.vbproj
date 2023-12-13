@@ -37,6 +37,9 @@
 
   <ItemGroup>
     <PackageReference Include="DevExpress.Wpf.Core" Version="23.1.6" />
+    <PackageReference Include="devexpress.wpf.grid.core" Version="23.1.6" />
+    <PackageReference Include="devexpress.wpf.pivotgrid" Version="23.1.6" />
+    <PackageReference Include="devexpress.wpf.printing" Version="23.1.6" />
     <PackageReference Include="DevExpress.Wpf.Themes.All" Version="23.1.6" />
   </ItemGroup>
 
@@ -54,5 +57,11 @@
     <Resource Include="Tüm_Kitaplar.png" />
     <Resource Include="Yayınevleri.png" />
     <Resource Include="Yazarlar.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+    </None>
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-    Title="MainWindow" MinHeight="1080" MinWidth="1920" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderBrush="#FF37251C" ActiveGlowColor="#FF674330" InactiveGlowColor="#FF37251C">
+    Title="MainWindow" Height="720" Width="1280" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" BorderBrush="#FF37251C" ActiveGlowColor="#FF674330" InactiveGlowColor="#FF37251C">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
@@ -31,9 +31,20 @@
                     <RowDefinition Height="35"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                <Border Margin="10,0,96,0">
+                    <DockPanel>
+                        <Label>
+                            <TextBlock Background="Black" FontSize="55" Height="35" Width="608">
+                                <TextBlock.Text>
+                         sdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfasdfasdfasdfasdfasdfasfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfafasdfasdfasdfasdfasdfasdfasdfasdfasfsdasdasdasdasdasdadadsadsadadasdasdasd
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </Label>
+                    </DockPanel>
+                </Border>
 
-                <Border Background="#f9f9f9" x:Name="brdTopRight" Height="35" VerticalAlignment="Bottom">
-
+                    <Border Background="#f9f9f9" x:Name="brdTopRight" Height="35" VerticalAlignment="Bottom">
+                  
                     <DockPanel Width="90" HorizontalAlignment="Right">
                         <Button Width="30" x:Name="btn_minimalize" Click="btn_minimalize_Click" BorderBrush="#FF37251C" Cursor="Hand" Foreground="#FF37251C">
                             <Button.Background>
@@ -177,9 +188,7 @@
                 </Border>
             </Border>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1" x:Name="MWContent" HorizontalAlignment="Center" Width="1400" Height="800" Margin="0,32,0,33">
-
-        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="MWContent" HorizontalAlignment="Center" Width="928" Margin="0,21,0,21"/>
 
     </Grid>
 
