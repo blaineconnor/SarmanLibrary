@@ -3,3 +3,4 @@ DevExpress.Xpf.Editors.ListBoxEdit, DevExpress.Xpf.Core.v23.1, Version=23.1.6.0,
 DevExpress.Xpf.Printing.DocumentPreviewControl, DevExpress.Xpf.Printing.v23.1, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.Xpf.Editors.SearchControl, DevExpress.Xpf.Core.v23.1, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.Xpf.Core.DXTabControl, DevExpress.Xpf.Core.v23.1, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
+DevExpress.Xpf.Editors.ComboBoxEdit, DevExpress.Xpf.Core.v23.1, Version=23.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a

@@ -13,6 +13,8 @@
 		<None Remove="Controllers\addAuthor.png" />
 		<None Remove="Controllers\addCategory.png" />
 		<None Remove="Controllers\addPublisher.png" />
+		<None Remove="Controllers\book.png" />
+		<None Remove="Controllers\Close.png" />
 		<None Remove="Controllers\updateAuthor.png" />
 		<None Remove="Controllers\updateBook.png" />
 		<None Remove="Controllers\updateCategory.png" />
@@ -56,6 +58,8 @@
 		<Resource Include="Controllers\addAuthor.png" />
 		<Resource Include="Controllers\addCategory.png" />
 		<Resource Include="Controllers\addPublisher.png" />
+		<Resource Include="Controllers\book.png" />
+		<Resource Include="Controllers\Close.png" />
 		<Resource Include="Controllers\updateAuthor.png" />
 		<Resource Include="Controllers\updateBook.png" />
 		<Resource Include="Controllers\updateCategory.png" />
