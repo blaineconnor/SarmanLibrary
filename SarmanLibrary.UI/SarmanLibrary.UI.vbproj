@@ -1,67 +1,86 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
-    <RootNamespace>SarmanLibrary.UI</RootNamespace>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<RootNamespace>SarmanLibrary.UI</RootNamespace>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="addBook.png" />
-    <None Remove="catPawsSideBar.png" />
-    <None Remove="fullscreen.png" />
-    <None Remove="Kategoriler.png" />
-    <None Remove="navbarLeft.png" />
-    <None Remove="navbarRight.png" />
-    <None Remove="navbarTop.png" />
-    <None Remove="SARMAN.png" />
-    <None Remove="sağ_üst_close_button.png" />
-    <None Remove="sağ_üst_minimalize_button.png" />
-    <None Remove="Tüm_Kitaplar.png" />
-    <None Remove="Yayınevleri.png" />
-    <None Remove="Yazarlar.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="addBook.png" />
+		<None Remove="catPawsSideBar.png" />
+		<None Remove="Controllers\addAuthor.png" />
+		<None Remove="Controllers\addCategory.png" />
+		<None Remove="Controllers\addPublisher.png" />
+		<None Remove="Controllers\updateAuthor.png" />
+		<None Remove="Controllers\updateBook.png" />
+		<None Remove="Controllers\updateCategory.png" />
+		<None Remove="Controllers\updatePublisher.png" />
+		<None Remove="fullscreen.png" />
+		<None Remove="Kategoriler.png" />
+		<None Remove="navbarLeft.png" />
+		<None Remove="navbarRight.png" />
+		<None Remove="navbarTop.png" />
+		<None Remove="SARMAN.png" />
+		<None Remove="sağ_üst_close_button.png" />
+		<None Remove="sağ_üst_minimalize_button.png" />
+		<None Remove="Tüm_Kitaplar.png" />
+		<None Remove="Yayınevleri.png" />
+		<None Remove="Yazarlar.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Import Include="System.Windows" />
-    <Import Include="System.Windows.Controls" />
-    <Import Include="System.Windows.Data" />
-    <Import Include="System.Windows.Documents" />
-    <Import Include="System.Windows.Input" />
-    <Import Include="System.Windows.Media" />
-    <Import Include="System.Windows.Media.Imaging" />
-    <Import Include="System.Windows.Navigation" />
-    <Import Include="System.Windows.Shapes" />
-  </ItemGroup>
+	<ItemGroup>
+		<Import Include="System.Windows" />
+		<Import Include="System.Windows.Controls" />
+		<Import Include="System.Windows.Data" />
+		<Import Include="System.Windows.Documents" />
+		<Import Include="System.Windows.Input" />
+		<Import Include="System.Windows.Media" />
+		<Import Include="System.Windows.Media.Imaging" />
+		<Import Include="System.Windows.Navigation" />
+		<Import Include="System.Windows.Shapes" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="DevExpress.Wpf.Core" Version="23.1.6" />
-    <PackageReference Include="devexpress.wpf.grid.core" Version="23.1.6" />
-    <PackageReference Include="devexpress.wpf.pivotgrid" Version="23.1.6" />
-    <PackageReference Include="devexpress.wpf.printing" Version="23.1.6" />
-    <PackageReference Include="DevExpress.Wpf.Themes.All" Version="23.1.6" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DevExpress.Wpf.Core" Version="23.1.6" />
+		<PackageReference Include="devexpress.wpf.grid.core" Version="23.1.6" />
+		<PackageReference Include="devexpress.wpf.pivotgrid" Version="23.1.6" />
+		<PackageReference Include="devexpress.wpf.printing" Version="23.1.6" />
+		<PackageReference Include="DevExpress.Wpf.Themes.All" Version="23.1.6" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="addBook.png" />
-    <Resource Include="catPawsSideBar.png" />
-    <Resource Include="fullscreen.png" />
-    <Resource Include="Kategoriler.png" />
-    <Resource Include="navbarLeft.png" />
-    <Resource Include="navbarRight.png" />
-    <Resource Include="navbarTop.png" />
-    <Resource Include="SARMAN.png" />
-    <Resource Include="sağ_üst_close_button.png" />
-    <Resource Include="sağ_üst_minimalize_button.png" />
-    <Resource Include="Tüm_Kitaplar.png" />
-    <Resource Include="Yayınevleri.png" />
-    <Resource Include="Yazarlar.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<Resource Include="addBook.png" />
+		<Resource Include="catPawsSideBar.png" />
+		<Resource Include="Controllers\addAuthor.png" />
+		<Resource Include="Controllers\addCategory.png" />
+		<Resource Include="Controllers\addPublisher.png" />
+		<Resource Include="Controllers\updateAuthor.png" />
+		<Resource Include="Controllers\updateBook.png" />
+		<Resource Include="Controllers\updateCategory.png" />
+		<Resource Include="Controllers\updatePublisher.png" />
+		<Resource Include="fullscreen.png" />
+		<Resource Include="Kategoriler.png" />
+		<Resource Include="navbarLeft.png" />
+		<Resource Include="navbarRight.png" />
+		<Resource Include="navbarTop.png" />
+		<Resource Include="SARMAN.png" />
+		<Resource Include="sağ_üst_close_button.png" />
+		<Resource Include="sağ_üst_minimalize_button.png" />
+		<Resource Include="Tüm_Kitaplar.png" />
+		<Resource Include="Yayınevleri.png" />
+		<Resource Include="Yazarlar.png" />
+		<Resource Include="updateBook.png" />
+		<Resource Include="updateAuthor.png" />
+		<Resource Include="updateCategory.png" />
+		<Resource Include="updatePublisher.png" />
 
-  <ItemGroup>
-    <None Update="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-    </None>
-  </ItemGroup>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="My Project\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+		</None>
+	</ItemGroup>
 </Project>

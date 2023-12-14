@@ -44,5 +44,15 @@ Partial Public Class MainWindow
         ucCall.Uc_Add(MWContent, New AllBooks())
     End Sub
 
+    Private Sub sideBar_Authors_Click(sender As Object, e As RoutedEventArgs)
+        ucCall.Uc_Add(MWContent, New Authors())
+    End Sub
 
+    Private Sub sideBar_Categories_Click(sender As Object, e As RoutedEventArgs)
+        ucCall.Uc_Add(MWContent, New Categories())
+    End Sub
+
+    Private Sub sideBar_Publishers_Click(sender As Object, e As RoutedEventArgs)
+        ucCall.Uc_Add(MWContent, New Publisher())
+    End Sub
 End Class

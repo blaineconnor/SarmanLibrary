@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AllBooks"
+﻿<UserControl x:Class="Authors"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:SarmanLibrary.UI"
              mc:Ignorable="d" 
              d:DesignHeight="400" d:DesignWidth="700">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -20,10 +19,27 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <DockPanel >               
+            <DockPanel >
                 <Button Click="Button_Click" Grid.Column="0" RenderTransformOrigin="0.5,0.5" Width="200" Height="40">
                     <Button.Background>
-                        <ImageBrush ImageSource="/Controllers/updateBook.png"/>
+                        <ImageBrush ImageSource="/Controllers/updateAuthor.png"/>
+                    </Button.Background>
+
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+
+                </Button>
+            </DockPanel>
+            <DockPanel Grid.Column="1">
+                <Button Height="40" Width="200">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Controllers/addAuthor.png"/>
                     </Button.Background>
                     <Button.RenderTransform>
                         <TransformGroup>
@@ -33,22 +49,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </Button.RenderTransform>
-                  
-                </Button>
-            </DockPanel>
-            <DockPanel Grid.Column="1">
-                <Button Height="40" Width="200">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-                <Button.Background>
-                    <ImageBrush ImageSource="/addBook.png"/>
-                </Button.Background>
+                    
                 </Button>
             </DockPanel>
 

@@ -5,7 +5,8 @@ Public Class ucCall
         If grd.Children.Count > 0 Then
             grd.Children.Clear()
             grd.Children.Add(uc)
+        ElseIf grd.Children.Count = 0 Then
+            grd.Children.Add(uc)
         End If
-        grd.Children.Add(uc)
     End Sub
 End Class

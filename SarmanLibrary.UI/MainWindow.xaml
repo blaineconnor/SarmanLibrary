@@ -30,18 +30,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
                     <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Border Margin="10,0,96,0">
-                    <DockPanel>
-                        <Label>
-                            <TextBlock Background="Black" FontSize="55" Height="35" Width="608">
-                                <TextBlock.Text>
-                         sdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfasdfasdfasdfasdfasdfasfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfafasdfasdfasdfasdfasdfasdfasdfasdfasfsdasdasdasdasdasdadadsadsadadasdasdasd
-                                </TextBlock.Text>
-                            </TextBlock>
-                        </Label>
-                    </DockPanel>
-                </Border>
+                </Grid.RowDefinitions>               
 
                     <Border Background="#f9f9f9" x:Name="brdTopRight" Height="35" VerticalAlignment="Bottom">
                   
@@ -141,21 +130,21 @@
 
                     </DockPanel>
                 </Button>
-                <Button Height="50" Style="{DynamicResource MenuButtons}" Cursor="Hand">
+                <Button Height="50" Style="{DynamicResource MenuButtons}" Cursor="Hand" x:Name="sideBar_Authors" Click="sideBar_Authors_Click">
                     <DockPanel Height="40" Width="180">
                         <DockPanel.Background>
                             <ImageBrush ImageSource="/Yazarlar.png"/>
                         </DockPanel.Background>
                     </DockPanel>
                 </Button>
-                <Button Height="50" Style="{DynamicResource MenuButtons}" Cursor="Hand">
+                <Button Height="50" Style="{DynamicResource MenuButtons}" Cursor="Hand" x:Name="sideBar_Categories" Click="sideBar_Categories_Click">
                     <DockPanel Height="40" Width="180">
                         <DockPanel.Background>
                             <ImageBrush ImageSource="/Kategoriler.png"/>
                         </DockPanel.Background>
                     </DockPanel>
                 </Button>
-                <Button Height="50" Style="{DynamicResource MenuButtons}" Cursor="Hand">
+                <Button Height="50" Style="{DynamicResource MenuButtons}" Cursor="Hand" x:Name="sideBar_Publishers" Click="sideBar_Publishers_Click">
                     <DockPanel Height="40" Width="180">
                         <DockPanel.Background>
                             <ImageBrush ImageSource="/Yayınevleri.png"/>
