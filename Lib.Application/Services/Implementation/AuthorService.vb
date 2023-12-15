@@ -19,7 +19,7 @@ Public Class AuthorService
             .FirstName = author.FirstName,
             .LastName = author.LastName,
             .BirthDate = author.BirthDate,
-            .Nationality = author.Nationality
+            .CountryId = author.CountryId
         }).ToList()
     End Function
 
@@ -34,7 +34,7 @@ Public Class AuthorService
                 .FirstName = author.FirstName,
                 .LastName = author.LastName,
                 .BirthDate = author.BirthDate,
-                .Nationality = author.Nationality
+                .CountryId = author.CountryId
             }
         End If
 
@@ -48,7 +48,7 @@ Public Class AuthorService
             .FirstName = addAuthorVM.FirstName,
             .LastName = addAuthorVM.LastName,
             .BirthDate = addAuthorVM.BirthDate,
-            .Nationality = addAuthorVM.Nationality
+            .CountryId = addAuthorVM.CountryId
         }
 
         authorRepository.Add(newAuthor)
@@ -64,7 +64,7 @@ Public Class AuthorService
             existingAuthor.FirstName = updateAuthorVM.FirstName
             existingAuthor.LastName = updateAuthorVM.LastName
             existingAuthor.BirthDate = updateAuthorVM.BirthDate
-            existingAuthor.Nationality = updateAuthorVM.Nationality
+            existingAuthor.CountryId = updateAuthorVM.CountryId
 
             authorRepository.Update(existingAuthor)
             _unitOfWork.CommitAsync().Wait()

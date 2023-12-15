@@ -20,4 +20,5 @@ Public Class LibContext
     Public Property Authors As DbSet(Of Author)
     Public Property Categories As DbSet(Of Category)
     Public Property Publishers As DbSet(Of Publisher)
+    Public Property Country As DbSet(Of Country)
 End Class

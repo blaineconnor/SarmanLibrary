@@ -19,25 +19,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <DockPanel >
-                <Button Click="Button_Click" Grid.Column="0" RenderTransformOrigin="0.5,0.5" Width="200" Height="40">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Controllers/updateAuthor.png"/>
-                    </Button.Background>
-
-                    <Button.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Button.RenderTransform>
-
-                </Button>
-            </DockPanel>
+            <DockPanel />
             <DockPanel Grid.Column="1">
-                <Button Height="40" Width="200">
+                <Button Height="40" Width="200" Cursor="Hand">
                     <Button.Background>
                         <ImageBrush ImageSource="/Controllers/addAuthor.png"/>
                     </Button.Background>

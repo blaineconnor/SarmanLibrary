@@ -1,16 +1,17 @@
-﻿<Window x:Class="addBook"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SarmanLibrary.UI"
+        xmlns:local="clr-namespace:SarmanLibrary.UI" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="addBook"
         mc:Ignorable="d"
-        Title="addBook" Height="400" Width="700" AllowsTransparency="True" WindowStyle="None" Background="#f0e9d9">
+        Title="addBook" Height="500" Width="700" AllowsTransparency="True" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen">
     <Grid>
         <Canvas>
             <Label Content="KİTAP EKLEME PENCERESİ" Canvas.Left="193" Canvas.Top="71" Width="230" Panel.ZIndex="3" FontFamily="Comic Sans MS" FontSize="16" FontWeight="Bold" Foreground="#FFF9F9F9" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Rectangle Fill="Chocolate" Height="30" Width="440" Canvas.Left="130" Canvas.Top="70" HorizontalAlignment="Center" VerticalAlignment="Top" Panel.ZIndex="2"/>
-            <Border  Height="230" Width="440" Canvas.Left="130" Canvas.Top="100" Background="#f9f9f9" CornerRadius="0,0,50,50" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Rectangle MouseLeftButtonDown="DragMove" x:Name="addBookMove" Fill="Chocolate" Height="30" Width="440" Canvas.Left="130" Canvas.Top="70" HorizontalAlignment="Center" VerticalAlignment="Top" Panel.ZIndex="2"/>
+            <Border  Height="300" Width="440" Canvas.Left="130" Canvas.Top="100" Background="#f9f9f9" CornerRadius="0,0,50,50" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Border.Effect>
                     <DropShadowEffect Opacity="0.35" Direction="275"/>
                 </Border.Effect>
@@ -20,37 +21,85 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                         <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="107*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="110*"/>
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0" Grid.Row="0">
-                        <Label Content="Kitap Adı :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold" BorderBrush="#FF37251C"/>
+                    <Border Grid.Column="0" Grid.Row="0" BorderBrush="#f0e9d9" BorderThickness="0,0,0,1" Grid.ColumnSpan="2">
+                        <Label Content="Kitap Adı :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold" />
 
                     </Border>
-                    <Border Grid.Column="0" Grid.Row="1">
-                        <Label Content="Yazar :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold" BorderBrush="#FF37251C"/>
+                    <Border Grid.Column="0" Grid.Row="1" BorderBrush="#f0e9d9" BorderThickness="0,0,0,1" Grid.ColumnSpan="2">
+                        <Label Content="Yazar :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold" />
 
                     </Border>
-                    <Border Grid.Column="0" Grid.Row="2">
-                        <Label Content="Kategori :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold" BorderBrush="#FF37251C"/>
+                    <Border Grid.Column="0" Grid.Row="2" BorderBrush="#f0e9d9" BorderThickness="0,0,0,1" Grid.ColumnSpan="2">
+                        <Label Content="Sayfa :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold" />
 
                     </Border>
-                    <Border Grid.Column="0" Grid.Row="3">
-                        <Label Content="Yayınevi :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold" BorderBrush="#FF37251C"/>
+                    <Border Grid.Column="0" Grid.Row="3" BorderBrush="#f0e9d9" BorderThickness="0,0,0,1" Grid.ColumnSpan="2">
+                        <Label Content="Çıkış Tarihi :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold" />
 
                     </Border>
-                    
-                        <Button Grid.Column="0" Grid.Row="4" Margin="10,10,10,10" BorderBrush="#00ABABAB" >
-                            <Button.Background>
-                                <ImageBrush ImageSource="/Controllers/Close.png"/>
-                            </Button.Background>
+                    <Border Grid.Column="0" Grid.Row="4" BorderBrush="#f0e9d9" BorderThickness="0,0,0,1" Grid.ColumnSpan="2">
+                        <Label Content="Okundu mu? :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold" />
 
-                        </Button>
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="5" BorderBrush="#f0e9d9" BorderThickness="0,0,0,1" Grid.ColumnSpan="2">
+                        <Label Content="Kategori :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold"/>
 
-                   
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="6" BorderBrush="#f0e9d9" BorderThickness="0,0,0,1" Grid.ColumnSpan="2">
+                        <Label Content="Yayınevi :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold" />
+
+                    </Border>
+                    <Border Grid.Column="0" Grid.Row="7" BorderBrush="#f0e9d9" BorderThickness="0,0,0,1" Grid.ColumnSpan="2">
+                        <Label Content="Detaylar :" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS" Foreground="#FF37251C" FontWeight="Bold"/>
+
+                    </Border>
+
+                    <Button Grid.Column="0" Grid.Row="8" Margin="10,10,4,10" BorderBrush="#00ABABAB" x:Name="closeWindow" Click="closeWindow_Click" Cursor="Hand">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Controllers/Close.png"/>
+                        </Button.Background>
+                    </Button>
+                    <Border Grid.Column="2" Grid.Row="0">
+                        <TextBox TextWrapping="Wrap" Background="#99F9F9F9" FontFamily="Comic Sans MS" Text="" BorderBrush="#f0e9d9"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="1">
+                        <ComboBox Background="#FFF9F9F9" FontFamily="Comic Sans MS" BorderBrush="#f0e9d9"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="2">
+                        <dxe:TextEdit TextWrapping="Wrap" Background="#99F9F9F9" FontFamily="Comic Sans MS"  Text="" BorderBrush="#f0e9d9" MaskType="Numeric" Mask="n0"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="3">
+                        <dxe:DateEdit MaskCulture="tr-TR" Mask="D" FontFamily="Comic Sans MS" BorderBrush="#FFF0E9D9" Background="#FFF9F9F9"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="4" BorderBrush="#FFF0E9D9" BorderThickness="1,1,1,1">
+                        <dxe:CheckEdit IsChecked="False" Background="#FFF0E9D9" BorderBrush="#FF37251C" BorderThickness="2,2,2,2" FontFamily="Comic Sans MS" HorizontalAlignment="Center"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="5">
+                        <ComboBox Background="#FFF9F9F9" FontFamily="Comic Sans MS" BorderBrush="#f0e9d9"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="6">
+                        <ComboBox Background="#FFF9F9F9" FontFamily="Comic Sans MS" BorderBrush="#f0e9d9"/>
+                    </Border>
+                    <Border Grid.Column="2" Grid.Row="7">
+                        <TextBox TextWrapping="Wrap" Background="#FFF9F9F9" FontFamily="Comic Sans MS" BorderBrush="#f0e9d9" />
+                    </Border>
+                    <Button Grid.Column="2" Grid.Row="8" Margin="10,10,10,10" BorderBrush="#00ABABAB" Cursor="Hand">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Controllers/addTheBook.png"/>
+                        </Button.Background>
+                    </Button>
+
                 </Grid>
             </Border>
             <Ellipse Height="90" Width="90" Canvas.Left="85" Canvas.Top="25" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="3" StrokeThickness="35">

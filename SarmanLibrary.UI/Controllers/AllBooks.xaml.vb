@@ -1,9 +1,12 @@
-﻿Public Class AllBooks
-    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+﻿Partial Public Class AllBooks
+    Inherits UserControl
 
+    Public Sub New()
+        InitializeComponent()
     End Sub
 
-    Private Sub ListBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs)
-
+    Private Sub btn_AddBook_Click(sender As Object, e As RoutedEventArgs)
+        Dim add As New addBook()
+        add.ShowDialog()
     End Sub
 End Class

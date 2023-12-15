@@ -35,11 +35,6 @@ Partial Public Class MainWindow
             Me.WindowState = WindowState.Normal
         End If
     End Sub
-
-    Private Sub Border_DpiChanged(sender As Object, e As DpiChangedEventArgs)
-
-    End Sub
-
     Private Sub sideBar_AllBooks_Click(sender As Object, e As RoutedEventArgs)
         ucCall.Uc_Add(MWContent, New AllBooks())
     End Sub

@@ -17,6 +17,8 @@ Public Class BookService
         Return books.Select(Function(book) New BookDTO With {
         .Id = book.Id,
         .BookName = book.BookName,
+        .Page = book.Page,
+        .ReleaseDate = book.ReleaseDate,
         .CategoryId = book.CategoryId,
         .Detail = book.Detail,
         .IsRead = book.IsRead,
@@ -30,6 +32,8 @@ Public Class BookService
 
         Dim newBook As New Book With {
             .BookName = addBookVM.BookName,
+            .Page = addBookVM.Page,
+            .ReleaseDate = addBookVM.ReleaseDate,
             .CategoryId = addBookVM.CategoryId,
             .Detail = addBookVM.Detail,
             .IsRead = addBookVM.IsRead,
@@ -47,6 +51,8 @@ Public Class BookService
 
         If existingBook IsNot Nothing Then
             existingBook.BookName = vM.BookName
+            existingBook.Page = vM.Page
+            existingBook.ReleaseDate = vM.ReleaseDate
             existingBook.CategoryId = vM.CategoryId
             existingBook.Detail = vM.Detail
             existingBook.IsRead = vM.IsRead
@@ -77,6 +83,8 @@ Public Class BookService
             Return New BookDTO With {
             .Id = book.Id,
             .BookName = book.BookName,
+            .Page = book.Page,
+            .ReleaseDate = book.ReleaseDate,
             .CategoryId = book.CategoryId,
             .Detail = book.Detail,
             .IsRead = book.IsRead,
@@ -108,6 +116,8 @@ Public Class BookService
         Return books.Select(Function(book) New BookDTO With {
         .Id = book.Id,
         .BookName = book.BookName,
+        .Page = book.Page,
+        .ReleaseDate = book.ReleaseDate,
         .CategoryId = book.CategoryId,
         .Detail = book.Detail,
         .IsRead = book.IsRead,
@@ -135,6 +145,8 @@ Public Class BookService
         Return books.Select(Function(book) New BookDTO With {
         .Id = book.Id,
         .BookName = book.BookName,
+        .Page = book.Page,
+        .ReleaseDate = book.ReleaseDate,
         .CategoryId = book.CategoryId,
         .Detail = book.Detail,
         .IsRead = book.IsRead,
@@ -162,6 +174,8 @@ Public Class BookService
         Return books.Select(Function(book) New BookDTO With {
         .Id = book.Id,
         .BookName = book.BookName,
+        .Page = book.Page,
+        .ReleaseDate = book.ReleaseDate,
         .CategoryId = book.CategoryId,
         .Detail = book.Detail,
         .IsRead = book.IsRead,
