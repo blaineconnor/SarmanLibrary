@@ -9,68 +9,118 @@ Public Class PublisherService
         _unitOfWork = unitOfWork
     End Sub
 
-    Public Async Function GetAllPublishers() As Task(Of List(Of PublisherDTO)) Implements IPublisherService.GetAllPublishers
+    Public Async Function GetAllPublishers() As Task(Of Result(Of List(Of PublisherDTO))) Implements IPublisherService.GetAllPublishers
         Dim publisherRepository = _unitOfWork.GetRepository(Of Publisher)()
+        Dim result As New Result(Of List(Of PublisherDTO))
 
-        Dim publishers = Await publisherRepository.GetAllAsync()
+        Try
+            Dim publishers = Await publisherRepository.GetAllAsync()
 
-        Return publishers.Select(Function(publisher) New PublisherDTO With {
-            .Id = publisher.Id,
-            .Name = publisher.Name,
-            .Description = publisher.Description
-        }).ToList()
-    End Function
-
-    Public Async Function GetPublisherById(publisherId As Long) As Task(Of PublisherDTO) Implements IPublisherService.GetPublisherById
-        Dim publisherRepository = _unitOfWork.GetRepository(Of Publisher)()
-
-        Dim publisher = Await publisherRepository.GetById(publisherId)
-
-        If publisher IsNot Nothing Then
-            Return New PublisherDTO With {
+            result.Data = publishers.Select(Function(publisher) New PublisherDTO With {
                 .Id = publisher.Id,
                 .Name = publisher.Name,
                 .Description = publisher.Description
-            }
-        End If
+            }).ToList()
 
-        Return Nothing
+            result.Success = True
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
+
+        Return result
     End Function
 
-    Public Sub AddPublisher(addPublisherVM As AddPublisherVM) Implements IPublisherService.AddPublisher
+    Public Async Function GetPublisherById(publisherId As Long) As Task(Of Result(Of PublisherDTO)) Implements IPublisherService.GetPublisherById
         Dim publisherRepository = _unitOfWork.GetRepository(Of Publisher)()
+        Dim result As New Result(Of PublisherDTO)
 
-        Dim newPublisher As New Publisher With {
-            .Name = addPublisherVM.Name,
-            .Description = addPublisherVM.Description
-        }
+        Try
+            Dim publisher = Await publisherRepository.GetById(publisherId)
 
-        publisherRepository.Add(newPublisher)
-        _unitOfWork.CommitAsync().Wait()
-    End Sub
+            If publisher IsNot Nothing Then
+                result.Data = New PublisherDTO With {
+                    .Id = publisher.Id,
+                    .Name = publisher.Name,
+                    .Description = publisher.Description
+                }
+                result.Success = True
+            Else
+                result.Errors.Add("Publisher not found.")
+            End If
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
 
-    Public Sub UpdatePublisher(updatePublisherVM As UpdatePublisherVM) Implements IPublisherService.UpdatePublisher
+        Return result
+    End Function
+
+    Public Function AddPublisher(addPublisherVM As AddPublisherVM) As Result(Of AddPublisherVM) Implements IPublisherService.AddPublisher
         Dim publisherRepository = _unitOfWork.GetRepository(Of Publisher)()
+        Dim result As New Result(Of AddPublisherVM)
 
-        Dim existingPublisher = publisherRepository.GetById(updatePublisherVM.Id).Result
+        Try
+            Dim newPublisher As New Publisher With {
+                .Name = addPublisherVM.Name,
+                .Description = addPublisherVM.Description
+            }
 
-        If existingPublisher IsNot Nothing Then
-            existingPublisher.Name = updatePublisherVM.Name
-            existingPublisher.Description = updatePublisherVM.Description
-
-            publisherRepository.Update(existingPublisher)
+            publisherRepository.Add(newPublisher)
             _unitOfWork.CommitAsync().Wait()
-        End If
-    End Sub
+            result.Success = True
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
 
-    Public Sub DeletePublisher(publisherId As Long) Implements IPublisherService.DeletePublisher
+        Return result
+    End Function
+
+    Public Function UpdatePublisher(updatePublisherVM As UpdatePublisherVM) As Result(Of UpdatePublisherVM) Implements IPublisherService.UpdatePublisher
         Dim publisherRepository = _unitOfWork.GetRepository(Of Publisher)()
+        Dim result As New Result(Of UpdatePublisherVM)
 
-        Dim publisherToDelete = publisherRepository.GetById(publisherId).Result
+        Try
+            Dim existingPublisher = publisherRepository.GetById(updatePublisherVM.Id).Result
 
-        If publisherToDelete IsNot Nothing Then
-            publisherRepository.Delete(publisherToDelete)
-            _unitOfWork.CommitAsync().Wait()
-        End If
-    End Sub
+            If existingPublisher IsNot Nothing Then
+                existingPublisher.Name = updatePublisherVM.Name
+                existingPublisher.Description = updatePublisherVM.Description
+
+                publisherRepository.Update(existingPublisher)
+                _unitOfWork.CommitAsync().Wait()
+                result.Success = True
+            Else
+                result.Errors.Add("Publisher not found.")
+            End If
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
+
+        Return result
+    End Function
+
+    Public Function DeletePublisher(publisherId As Long) As Result(Of Object) Implements IPublisherService.DeletePublisher
+        Dim publisherRepository = _unitOfWork.GetRepository(Of Publisher)()
+        Dim result As New Result(Of Object)
+
+        Try
+            Dim publisherToDelete = publisherRepository.GetById(publisherId).Result
+
+            If publisherToDelete IsNot Nothing Then
+                publisherRepository.Delete(publisherToDelete)
+                _unitOfWork.CommitAsync().Wait()
+                result.Success = True
+            Else
+                result.Errors.Add("Publisher not found.")
+            End If
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
+
+        Return result
+    End Function
 End Class

@@ -11,6 +11,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
+        
         <Border  Grid.Row="0">
             <DataGrid BorderBrush="{x:Null}" BorderThickness="0"/>
         </Border>
@@ -21,7 +22,7 @@
             </Grid.ColumnDefinitions>
             <DockPanel />
             <DockPanel Grid.Column="1">
-                <Button Height="40" Width="200" Cursor="Hand">
+                <Button x:Name="AddAuthor" Click="AddAuthor_Click" Height="40" Width="200" Cursor="Hand">
                     <Button.Background>
                         <ImageBrush ImageSource="/Controllers/addAuthor.png"/>
                     </Button.Background>

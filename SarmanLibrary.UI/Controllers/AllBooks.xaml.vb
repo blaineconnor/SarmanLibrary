@@ -5,6 +5,7 @@
         InitializeComponent()
     End Sub
 
+
     Private Sub btn_AddBook_Click(sender As Object, e As RoutedEventArgs)
         Dim add As New addBook()
         add.ShowDialog()

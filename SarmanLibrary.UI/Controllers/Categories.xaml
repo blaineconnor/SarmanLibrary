@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
             <DockPanel />
             <DockPanel Grid.Column="1">
-                <Button Height="40" Width="200" Cursor="Hand">
+                <Button x:Name="addCategory" Click="addCategory_Click" Height="40" Width="200" Cursor="Hand">
                     <Button.Background>
                         <ImageBrush ImageSource="/Controllers/addCategory.png"/>
                     </Button.Background>

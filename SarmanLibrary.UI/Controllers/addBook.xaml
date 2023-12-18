@@ -9,7 +9,7 @@
         Title="addBook" Height="500" Width="700" AllowsTransparency="True" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen">
     <Grid>
         <Canvas>
-            <Label Content="KİTAP EKLEME PENCERESİ" Canvas.Left="193" Canvas.Top="71" Width="230" Panel.ZIndex="3" FontFamily="Comic Sans MS" FontSize="16" FontWeight="Bold" Foreground="#FFF9F9F9" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label MouseLeftButtonDown="DragMove" Content="KİTAP EKLEME PENCERESİ" Canvas.Left="193" Canvas.Top="71" Width="230" Panel.ZIndex="3" FontFamily="Comic Sans MS" FontSize="16" FontWeight="Bold" Foreground="#FFF9F9F9" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             <Rectangle MouseLeftButtonDown="DragMove" x:Name="addBookMove" Fill="Chocolate" Height="30" Width="440" Canvas.Left="130" Canvas.Top="70" HorizontalAlignment="Center" VerticalAlignment="Top" Panel.ZIndex="2"/>
             <Border  Height="300" Width="440" Canvas.Left="130" Canvas.Top="100" Background="#f9f9f9" CornerRadius="0,0,50,50" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Border.Effect>
@@ -102,7 +102,7 @@
 
                 </Grid>
             </Border>
-            <Ellipse Height="90" Width="90" Canvas.Left="85" Canvas.Top="25" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="3" StrokeThickness="35">
+            <Ellipse MouseLeftButtonDown="DragMove" Height="90" Width="90" Canvas.Left="85" Canvas.Top="25" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="3" StrokeThickness="35">
                 <Ellipse.Effect>
                     <DropShadowEffect/>
                 </Ellipse.Effect>

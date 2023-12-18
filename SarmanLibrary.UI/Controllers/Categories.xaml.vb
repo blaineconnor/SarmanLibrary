@@ -1,5 +1,12 @@
 ﻿Public Class Categories
-    Private Sub Button_Click(sender As Object, e As RoutedEventArgs)
+    Inherits UserControl
 
+    Public Sub New()
+        InitializeComponent()
+    End Sub
+
+    Private Sub addCategory_Click(sender As Object, e As RoutedEventArgs)
+        Dim add As New AddCategory()
+        add.ShowDialog()
     End Sub
 End Class

@@ -21,7 +21,7 @@
             </Grid.ColumnDefinitions>
             <DockPanel />
             <DockPanel Grid.Column="1">
-                <Button Height="40" Width="200" Cursor="Hand">
+                <Button x:Name="addPublisher" Click="addPublisher_Click" Height="40" Width="200" Cursor="Hand">
                     <Button.Background>
                         <ImageBrush ImageSource="/Controllers/addPublisher.png"/>
                     </Button.Background>

@@ -12,8 +12,102 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
-        <Border  Grid.Row="0">
-            <DataGrid BorderBrush="{x:Null}" BorderThickness="0"/>
+        <Border
+        
+    Grid.Row="0"
+    Margin="5,5,5,5"
+    Padding="10"
+    Background="white"
+    CornerRadius="10">
+
+
+            <DataGrid x:Name="dtGridTeacher"
+        xmlns:my="http://schemas.microsoft.com/wpf/2008/toolkit"
+        AutoGenerateColumns="False"
+        Background="white"
+        BorderThickness="0"
+        CanUserAddRows="False"
+        ColumnWidth="*"
+        GridLinesVisibility="None"
+        HeadersVisibility="Column"
+        RowHeaderWidth="0"
+        ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                <DataGrid.ColumnHeaderStyle>
+
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="White" />
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="Padding" Value="5,5,5,5" />
+                        <Setter Property="FontFamily" Value="Montserrat" />
+                        <Setter Property="FontSize" Value="15" />
+                    </Style>
+
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow" >
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Margin" Value="10,2,0,10" />
+                        <!--  Satır arka plan rengi  -->
+                        <Setter Property="Foreground" Value="#121F2C" />
+
+                        <!--  Satır metin rengi  -->
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent" />
+                                <!--  Seçili satır arka plan rengi  -->
+                                <Setter Property="Foreground" Value="White" />
+                                <!--  Seçili satır metin rengi  -->
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding BookName}" Header="Ad" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding Page}" Header="Soyad"  IsReadOnly="True"  />
+                    <DataGridTextColumn Binding="{Binding ReleaseDateId}" Header="Telefon" IsReadOnly="True" />
+                    <DataGridTextColumn Binding="{Binding CategoryId}" Header="Yaş" IsReadOnly="True"  />
+                    <DataGridTextColumn Binding="{Binding BranchName}" Header="Branş" IsReadOnly="True" />
+
+
+                    <DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                            Width="60"
+                            Background="#f15662"
+                            BorderThickness="0"
+                            Click="btn_DeleteClick"
+                            Content="Sil"
+                            Foreground="White" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                            Width="60"
+                            Background="#dfcfb7"
+                            BorderThickness="0"
+                            Click="btn_EditClick"
+                            Content="Güncelle"
+                            Foreground="White" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+
+                </DataGrid.Columns>
+
+
+            </DataGrid>
+
         </Border>
         <Grid Grid.Row="1" Background="#f9f9f9">
             <Grid.ColumnDefinitions>

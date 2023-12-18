@@ -9,64 +9,114 @@ Public Class CategoryService
         _unitOfWork = unitOfWork
     End Sub
 
-    Public Async Function GetAllCategories() As Task(Of List(Of CategoryDTO)) Implements ICategoryService.GetAllCategories
+    Public Async Function GetAllCategories() As Task(Of Result(Of List(Of CategoryDTO))) Implements ICategoryService.GetAllCategories
         Dim categoryRepository = _unitOfWork.GetRepository(Of Category)()
+        Dim result As New Result(Of List(Of CategoryDTO))
 
-        Dim categories = Await categoryRepository.GetAllAsync()
+        Try
+            Dim categories = Await categoryRepository.GetAllAsync()
 
-        Return categories.Select(Function(category) New CategoryDTO With {
-            .Id = category.Id,
-            .Name = category.Name
-        }).ToList()
-    End Function
-
-    Public Async Function GetCategoryById(categoryId As Long) As Task(Of CategoryDTO) Implements ICategoryService.GetCategoryById
-        Dim categoryRepository = _unitOfWork.GetRepository(Of Category)()
-
-        Dim category = Await categoryRepository.GetById(categoryId)
-
-        If category IsNot Nothing Then
-            Return New CategoryDTO With {
+            result.Data = categories.Select(Function(category) New CategoryDTO With {
                 .Id = category.Id,
                 .Name = category.Name
-            }
-        End If
+            }).ToList()
 
-        Return Nothing
+            result.Success = True
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
+
+        Return result
     End Function
 
-    Public Sub CreateCategory(createCategoryVM As CreateCategoryVM) Implements ICategoryService.CreateCategory
+    Public Async Function GetCategoryById(categoryId As Long) As Task(Of Result(Of CategoryDTO)) Implements ICategoryService.GetCategoryById
         Dim categoryRepository = _unitOfWork.GetRepository(Of Category)()
+        Dim result As New Result(Of CategoryDTO)
 
-        Dim newCategory As New Category With {
-            .Name = createCategoryVM.Name
-        }
+        Try
+            Dim category = Await categoryRepository.GetById(categoryId)
 
-        categoryRepository.Add(newCategory)
-        _unitOfWork.CommitAsync().Wait()
-    End Sub
+            If category IsNot Nothing Then
+                result.Data = New CategoryDTO With {
+                    .Id = category.Id,
+                    .Name = category.Name
+                }
+                result.Success = True
+            Else
+                result.Errors.Add("Category not found.")
+            End If
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
 
-    Public Sub UpdateCategory(updateCategoryVM As UpdateCategoryVM) Implements ICategoryService.UpdateCategory
+        Return result
+    End Function
+
+    Public Function CreateCategory(createCategoryVM As CreateCategoryVM) As Result(Of CreateCategoryVM) Implements ICategoryService.CreateCategory
         Dim categoryRepository = _unitOfWork.GetRepository(Of Category)()
+        Dim result As New Result(Of CreateCategoryVM)
 
-        Dim existingCategory = categoryRepository.GetById(updateCategoryVM.Id).Result
+        Try
+            Dim newCategory As New Category With {
+                .Name = createCategoryVM.Name
+            }
 
-        If existingCategory IsNot Nothing Then
-            existingCategory.Name = updateCategoryVM.Name
-
-            categoryRepository.Update(existingCategory)
+            categoryRepository.Add(newCategory)
             _unitOfWork.CommitAsync().Wait()
-        End If
-    End Sub
+            result.Success = True
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
 
-    Public Sub DeleteCategory(categoryId As Long) Implements ICategoryService.DeleteCategory
+        Return result
+    End Function
+
+    Public Function UpdateCategory(updateCategoryVM As UpdateCategoryVM) As Result(Of UpdateCategoryVM) Implements ICategoryService.UpdateCategory
         Dim categoryRepository = _unitOfWork.GetRepository(Of Category)()
+        Dim result As New Result(Of UpdateCategoryVM)
 
-        Dim categoryToDelete = categoryRepository.GetById(categoryId).Result
+        Try
+            Dim existingCategory = categoryRepository.GetById(updateCategoryVM.Id).Result
 
-        If categoryToDelete IsNot Nothing Then
-            categoryRepository.Delete(categoryToDelete)
-            _unitOfWork.CommitAsync().Wait()
-        End If
-    End Sub
+            If existingCategory IsNot Nothing Then
+                existingCategory.Name = updateCategoryVM.Name
+
+                categoryRepository.Update(existingCategory)
+                _unitOfWork.CommitAsync().Wait()
+                result.Success = True
+            Else
+                result.Errors.Add("Category not found.")
+            End If
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
+
+        Return result
+    End Function
+
+    Public Function DeleteCategory(categoryId As Long) As Result(Of Object) Implements ICategoryService.DeleteCategory
+        Dim categoryRepository = _unitOfWork.GetRepository(Of Category)()
+        Dim result As New Result(Of Object)
+
+        Try
+            Dim categoryToDelete = categoryRepository.GetById(categoryId).Result
+
+            If categoryToDelete IsNot Nothing Then
+                categoryRepository.Delete(categoryToDelete)
+                _unitOfWork.CommitAsync().Wait()
+                result.Success = True
+            Else
+                result.Errors.Add("Category not found.")
+            End If
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
+
+        Return result
+    End Function
 End Class

@@ -9,76 +9,126 @@ Public Class AuthorService
         _unitOfWork = unitOfWork
     End Sub
 
-    Public Async Function GetAllAuthors() As Task(Of List(Of AuthorDTO)) Implements IAuthorService.GetAllAuthors
+    Public Async Function GetAllAuthors() As Task(Of Result(Of List(Of AuthorDTO))) Implements IAuthorService.GetAllAuthors
         Dim authorRepository = _unitOfWork.GetRepository(Of Author)()
+        Dim result As New Result(Of List(Of AuthorDTO))
 
-        Dim authors = Await authorRepository.GetAllAsync()
+        Try
+            Dim authors = Await authorRepository.GetAllAsync()
 
-        Return authors.Select(Function(author) New AuthorDTO With {
-            .Id = author.Id,
-            .FirstName = author.FirstName,
-            .LastName = author.LastName,
-            .BirthDate = author.BirthDate,
-            .CountryId = author.CountryId
-        }).ToList()
-    End Function
-
-    Public Async Function GetAuthorById(authorId As Long) As Task(Of AuthorDTO) Implements IAuthorService.GetAuthorById
-        Dim authorRepository = _unitOfWork.GetRepository(Of Author)()
-
-        Dim author = Await authorRepository.GetById(authorId)
-
-        If author IsNot Nothing Then
-            Return New AuthorDTO With {
+            Dim r = authors.Select(Function(author) New AuthorDTO With {
                 .Id = author.Id,
                 .FirstName = author.FirstName,
                 .LastName = author.LastName,
-                .BirthDate = author.BirthDate,
-                .CountryId = author.CountryId
-            }
-        End If
+                .BirthDate = author.Year.Year,
+                .CountryName = author.Nationality.Name
+            }).ToList()
 
-        Return Nothing
+            result.Data = r
+            result.Success = True
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
+
+        Return result
     End Function
 
-    Public Sub AddAuthor(addAuthorVM As AddAuthorVM) Implements IAuthorService.AddAuthor
+    Public Async Function GetAuthorById(authorId As Long) As Task(Of Result(Of AuthorDTO)) Implements IAuthorService.GetAuthorById
         Dim authorRepository = _unitOfWork.GetRepository(Of Author)()
+        Dim result As New Result(Of AuthorDTO)
 
-        Dim newAuthor As New Author With {
-            .FirstName = addAuthorVM.FirstName,
-            .LastName = addAuthorVM.LastName,
-            .BirthDate = addAuthorVM.BirthDate,
-            .CountryId = addAuthorVM.CountryId
-        }
+        Try
+            Dim author = Await authorRepository.GetById(authorId)
 
-        authorRepository.Add(newAuthor)
-        _unitOfWork.CommitAsync().Wait()
-    End Sub
+            If author IsNot Nothing Then
+                result.Data = New AuthorDTO With {
+                    .Id = author.Id,
+                    .FirstName = author.FirstName,
+                    .LastName = author.LastName,
+                    .BirthDate = author.Year.Year,
+                    .CountryName = author.Nationality.Name
+                }
+                result.Success = True
+            Else
+                result.Errors.Add("Yazar bulunamadı.")
+            End If
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
 
-    Public Sub UpdateAuthor(updateAuthorVM As UpdateAuthorVM) Implements IAuthorService.UpdateAuthor
+        Return result
+    End Function
+
+    Public Function AddAuthor(addAuthorVM As AddAuthorVM) As Result(Of AddAuthorVM) Implements IAuthorService.AddAuthor
         Dim authorRepository = _unitOfWork.GetRepository(Of Author)()
+        Dim result As New Result(Of AddAuthorVM)
 
-        Dim existingAuthor = authorRepository.GetById(updateAuthorVM.Id).Result
+        Try
+            Dim newAuthor As New Author With {
+                .FirstName = addAuthorVM.FirstName,
+                .LastName = addAuthorVM.LastName,
+                .BirthDate = addAuthorVM.BirthDate,
+                .Country = addAuthorVM.CountryName
+            }
 
-        If existingAuthor IsNot Nothing Then
-            existingAuthor.FirstName = updateAuthorVM.FirstName
-            existingAuthor.LastName = updateAuthorVM.LastName
-            existingAuthor.BirthDate = updateAuthorVM.BirthDate
-            existingAuthor.CountryId = updateAuthorVM.CountryId
-
-            authorRepository.Update(existingAuthor)
+            authorRepository.Add(newAuthor)
             _unitOfWork.CommitAsync().Wait()
-        End If
-    End Sub
+            result.Success = True
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
 
-    Public Sub DeleteAuthor(authorId As Long) Implements IAuthorService.DeleteAuthor
+        Return result
+    End Function
+
+    Public Function UpdateAuthor(updateAuthorVM As UpdateAuthorVM) As Result(Of UpdateAuthorVM) Implements IAuthorService.UpdateAuthor
         Dim authorRepository = _unitOfWork.GetRepository(Of Author)()
+        Dim result As New Result(Of UpdateAuthorVM)
 
-        Dim authorToDelete = authorRepository.GetById(authorId).Result
+        Try
+            Dim existingAuthor = authorRepository.GetById(updateAuthorVM.Id).Result
+            If existingAuthor IsNot Nothing Then
+                existingAuthor.FirstName = updateAuthorVM.FirstName
+                existingAuthor.LastName = updateAuthorVM.LastName
+                existingAuthor.BirthDate = updateAuthorVM.BirthDate
+                existingAuthor.Country = updateAuthorVM.CountryId
 
-        If authorToDelete IsNot Nothing Then
-            authorRepository.Delete(authorToDelete)
-            _unitOfWork.CommitAsync().Wait()
-        End If
-    End Sub
+                authorRepository.Update(existingAuthor)
+                _unitOfWork.CommitAsync().Wait()
+                result.Success = True
+            Else
+                result.Errors.Add("Yazar bulunamadı.")
+            End If
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
+
+        Return result
+    End Function
+
+    Public Function DeleteAuthor(authorId As Long) As Result(Of Object) Implements IAuthorService.DeleteAuthor
+        Dim authorRepository = _unitOfWork.GetRepository(Of Author)()
+        Dim result As New Result(Of Object)
+
+        Try
+            Dim authorToDelete = authorRepository.GetById(authorId).Result
+
+            If authorToDelete IsNot Nothing Then
+                authorRepository.Delete(authorToDelete)
+                _unitOfWork.CommitAsync().Wait()
+                result.Success = True
+            Else
+                result.Errors.Add("Yazar bulunamadı.")
+            End If
+        Catch ex As Exception
+            result.Success = False
+            result.Errors.Add(ex.Message)
+        End Try
+
+        Return result
+    End Function
 End Class

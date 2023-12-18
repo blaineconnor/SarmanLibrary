@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SarmanLibrary.UI" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         mc:Ignorable="d"
-        Title="AddCategory" Height="292" Width="700" AllowsTransparency="True" WindowStyle="None" Background="#f0e9d9">
+        Title="AddCategory" Height="292" Width="700" AllowsTransparency="True" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,0,250">
         <Canvas Height="301" VerticalAlignment="Top">
-            <Label Content="KATEGORİ EKLEME PENCERESİ" Canvas.Left="193" Canvas.Top="71" Width="263" Panel.ZIndex="3" FontFamily="Comic Sans MS" FontSize="16" FontWeight="Bold" Foreground="#FFF9F9F9" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Rectangle Fill="Chocolate" Height="30" Width="440" Canvas.Left="130" Canvas.Top="70" HorizontalAlignment="Center" VerticalAlignment="Top" Panel.ZIndex="2"/>
+            <Label MouseLeftButtonDown="DragMove" Content="KATEGORİ EKLEME PENCERESİ" Canvas.Left="193" Canvas.Top="71" Width="263" Panel.ZIndex="3" FontFamily="Comic Sans MS" FontSize="16" FontWeight="Bold" Foreground="#FFF9F9F9" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Rectangle MouseLeftButtonDown="DragMove" Fill="Chocolate" Height="30" Width="440" Canvas.Left="130" Canvas.Top="70" HorizontalAlignment="Center" VerticalAlignment="Top" Panel.ZIndex="2"/>
             <Border  Height="150" Width="440" Canvas.Left="130" Canvas.Top="100" Background="#f9f9f9" CornerRadius="0,0,50,50" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Border.Effect>
                     <DropShadowEffect Opacity="0.35" Direction="275"/>
@@ -30,7 +30,7 @@
                     <Border Grid.Column="1" Grid.Row="0">
                         <TextBox TextWrapping="Wrap" FontFamily="Comic Sans MS" Text="" BorderBrush="#f0e9d9" Background="#99F9F9F9" FontSize="14"/>
                     </Border>
-                    <Button Grid.Column="0" Grid.Row="8" Margin="10,10,10,10" BorderBrush="#00ABABAB" Cursor="Hand">
+                    <Button x:Name="windowClose" Click="windowClose_Click" Grid.Column="0" Grid.Row="8" Margin="10,10,10,10" BorderBrush="#00ABABAB" Cursor="Hand">
                         <Button.Background>
                             <ImageBrush ImageSource="/Controllers/Close.png"/>
                         </Button.Background>
@@ -43,7 +43,7 @@
                     </Button>
                 </Grid>
             </Border>
-            <Ellipse Height="90" Width="90" Canvas.Left="85" Canvas.Top="25" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="3" StrokeThickness="35">
+            <Ellipse MouseLeftButtonDown="DragMove" Height="90" Width="90" Canvas.Left="85" Canvas.Top="25" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="3" StrokeThickness="35">
                 <Ellipse.Effect>
                     <DropShadowEffect/>
                 </Ellipse.Effect>

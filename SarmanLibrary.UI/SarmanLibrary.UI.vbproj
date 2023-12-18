@@ -59,6 +59,7 @@
 		<PackageReference Include="devexpress.wpf.pivotgrid" Version="23.1.6" />
 		<PackageReference Include="devexpress.wpf.printing" Version="23.1.6" />
 		<PackageReference Include="DevExpress.Wpf.Themes.All" Version="23.1.6" />
+		<PackageReference Include="Microsoft.AspNet.Mvc" Version="5.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
