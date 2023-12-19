@@ -7,7 +7,6 @@ Public Class DomainToDTO
         CreateMap(Of Author, AuthorDTO)()
         CreateMap(Of Book, BookDTO)()
         CreateMap(Of Category, CategoryDTO)()
-
         CreateMap(Of Publisher, PublisherDTO)()
     End Sub
 End Class

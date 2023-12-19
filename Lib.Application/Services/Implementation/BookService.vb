@@ -45,7 +45,9 @@ Public Class BookService
             Dim newBook As New Book With {
                 .BookName = addBookVM.BookName,
                 .Page = addBookVM.Page,
-                .ReleaseDate = addBookVM.ReleaseDate,
+                .Year = New Year With {
+                    .Year = addBookVM.ReleaseDate
+                 },
                 .Category = New Category With {
                 .Name = addBookVM.CategoryName
                  },
@@ -80,7 +82,7 @@ Public Class BookService
             If existingBook IsNot Nothing Then
                 existingBook.BookName = vM.BookName
                 existingBook.Page = vM.Page
-                existingBook.ReleaseDate = vM.ReleaseDate
+                existingBook.Year.Year = vM.ReleaseDate
                 existingBook.Category.Name = vM.CategoryName
                 existingBook.Detail = vM.Detail
                 existingBook.IsRead = vM.IsRead
@@ -135,17 +137,18 @@ Public Class BookService
                     .Id = book.Id,
                     .BookName = book.BookName,
                     .Page = book.Page,
-                    .CategoryName = book.Category.Name,
+                    .CategoryName = If(book.Category IsNot Nothing, book.Category.Name, Nothing),
                     .Detail = book.Detail,
                     .IsRead = book.IsRead,
-                    .PublisherName = book.Publisher.Name,
-                    .AuthorName = book.Author.LastName,
-                    .ReleaseDate = book.Year.Year
+                    .PublisherName = If(book.Publisher IsNot Nothing, book.Publisher.Name, Nothing),
+                    .AuthorName = If(book.Author IsNot Nothing, book.Author.LastName, Nothing),
+                    .ReleaseDate = If(book.Year IsNot Nothing, book.Year.Year, Nothing)
                 }
                 result.Success = True
             Else
                 result.Errors.Add("Kitap bulunamadı")
             End If
+
         Catch ex As Exception
             result.Success = False
             result.Errors.Add(ex.Message)
@@ -169,7 +172,8 @@ Public Class BookService
                 .Detail = book.Detail,
                 .IsRead = book.IsRead,
                 .PublisherName = book.Publisher.Name,
-                .AuthorName = book.Author.LastName
+                .AuthorName = book.Author.LastName,
+                .ReleaseDate = book.Year.Year
             }).ToList()
 
             result.Success = True
