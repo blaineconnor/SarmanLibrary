@@ -10,4 +10,12 @@
         Dim add As New addBook()
         add.ShowDialog()
     End Sub
+
+    Private Sub btn_EditClick(sender As Object, e As RoutedEventArgs)
+
+    End Sub
+
+    Private Sub btn_DeleteClick(sender As Object, e As RoutedEventArgs)
+
+    End Sub
 End Class

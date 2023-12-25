@@ -3,12 +3,12 @@
 
     Public Property FirstName As String
     Public Property LastName As String
-    Public Property Country As String
-    Public Property BirthDate As Integer
+    Public Property CountryId As Long
+    Public Property YearId As Long
 
     'NavProp
     Public Overridable Property Year As Year
-    Public Overridable Property Nationality As Country
+    Public Overridable Property Country As Country
 
     Public Overridable Property Books As ICollection(Of Book)
 

@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "Lib.UI": {
-      "commandName": "Project",
-      "jsWebView2Debugging": true,
-      "nativeDebugging": false
-    }
-  }
-}

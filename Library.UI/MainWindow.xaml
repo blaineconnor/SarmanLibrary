@@ -1,10 +1,9 @@
-﻿<dx:ThemedWindow
+﻿<dx:ThemedWindow 
+    x:Class="MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
-    x:Class="MainWindow"
-    Title="MainWindow" MinHeight="800" MinWidth="1000" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" BorderBrush="#FF37251C" ActiveGlowColor="#FF674330" InactiveGlowColor="#FF37251C">
+     Title="MainWindow" Height="720" Width="1280" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" BorderBrush="#FF37251C" ActiveGlowColor="#FF674330" InactiveGlowColor="#FF37251C">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
@@ -14,8 +13,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="278"/>
 
-            <ColumnDefinition Width="277*"/>
-            <ColumnDefinition Width="415*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <!--Logo-->
         <Border Background="#d9c6a5" Grid.Column="0" Grid.Row="0">
@@ -27,7 +25,7 @@
         </Border>
 
         <!--Topbar ve Navbar-->
-        <Border Background="#f0e9d9" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2">
+        <Border Background="#f0e9d9" Grid.Column="1" Grid.Row="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
@@ -81,7 +79,7 @@
                                         <Label Content="5" Foreground="#37251c" FontSize="14" FontFamily="Comic Sans MS"/>
                                     </DockPanel>
                                 </StackPanel>
-                                
+
                             </StackPanel>
 
 
@@ -122,9 +120,9 @@
         <!--SideBar-->
         <Border  Background="#99f0e9d9" Margin="0,5,0,0" Grid.Column="0" Grid.Row="1" BorderBrush="#FFF0E9D9" VerticalAlignment="Top" Cursor="Arrow" CornerRadius="0,20,0,0" Height="860">
             <StackPanel Margin="0,15,0,0" Height="860">
-              
-                <Button Height="50" Style="{DynamicResource MenuButtons}" BorderBrush="#FF37251C" Cursor="Hand" x:Name="sideBar_AllBooks" Click="sideBar_AllBooks_Click">
-                    
+
+                <Button Height="50"  BorderBrush="#FF37251C" Cursor="Hand" x:Name="sideBar_AllBooks" Click="sideBar_AllBooks_Click">
+
                     <DockPanel Height="40" Width="180">
                         <DockPanel.Background>
                             <ImageBrush ImageSource="/Tüm_Kitaplar.png"/>
@@ -132,21 +130,21 @@
 
                     </DockPanel>
                 </Button>
-                <Button Height="50" Style="{DynamicResource MenuButtons}" Cursor="Hand">
+                <Button Height="50" Cursor="Hand" x:Name="sideBar_Authors" Click="sideBar_Authors_Click">
                     <DockPanel Height="40" Width="180">
                         <DockPanel.Background>
                             <ImageBrush ImageSource="/Yazarlar.png"/>
                         </DockPanel.Background>
                     </DockPanel>
                 </Button>
-                <Button Height="50" Style="{DynamicResource MenuButtons}" Cursor="Hand">
+                <Button Height="50"  Cursor="Hand" x:Name="sideBar_Categories" Click="sideBar_Categories_Click">
                     <DockPanel Height="40" Width="180">
                         <DockPanel.Background>
                             <ImageBrush ImageSource="/Kategoriler.png"/>
                         </DockPanel.Background>
                     </DockPanel>
                 </Button>
-                <Button Height="50" Style="{DynamicResource MenuButtons}" Cursor="Hand">
+                <Button Height="50" Cursor="Hand" x:Name="sideBar_Publishers" Click="sideBar_Publishers_Click">
                     <DockPanel Height="40" Width="180">
                         <DockPanel.Background>
                             <ImageBrush ImageSource="/Yayınevleri.png"/>
@@ -172,20 +170,16 @@
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="#f0e9d9"/>
+
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
                     </Border.Style>
                 </Border>
             </Border>
-
-
         </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="MWContent" HorizontalAlignment="Center" Width="928" Margin="0,21,0,21"/>
 
-        <Border Grid.Column="1" Grid.Row="1" Background="#f9f9f9">
-            <Grid x:Name="Content">
-                
-            </Grid>
-        </Border>
     </Grid>
+
 </dx:ThemedWindow>

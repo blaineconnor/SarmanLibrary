@@ -46,7 +46,7 @@ Public Class PublisherService
                 }
                 result.Success = True
             Else
-                result.Errors.Add("Publisher not found.")
+                result.Errors.Add("Yayınevi bulunamadı.")
             End If
         Catch ex As Exception
             result.Success = False
@@ -56,9 +56,9 @@ Public Class PublisherService
         Return result
     End Function
 
-    Public Function AddPublisher(addPublisherVM As AddPublisherVM) As Result(Of AddPublisherVM) Implements IPublisherService.AddPublisher
+    Public Function AddPublisher(addPublisherVM As AddPublisherVM) As Result(Of Integer) Implements IPublisherService.AddPublisher
         Dim publisherRepository = _unitOfWork.GetRepository(Of Publisher)()
-        Dim result As New Result(Of AddPublisherVM)
+        Dim result As New Result(Of Object)
 
         Try
             Dim newPublisher As New Publisher With {
@@ -74,12 +74,12 @@ Public Class PublisherService
             result.Errors.Add(ex.Message)
         End Try
 
-        Return result
+        Return result.Data
     End Function
 
-    Public Function UpdatePublisher(updatePublisherVM As UpdatePublisherVM) As Result(Of UpdatePublisherVM) Implements IPublisherService.UpdatePublisher
+    Public Function UpdatePublisher(updatePublisherVM As UpdatePublisherVM) As Result(Of Integer) Implements IPublisherService.UpdatePublisher
         Dim publisherRepository = _unitOfWork.GetRepository(Of Publisher)()
-        Dim result As New Result(Of UpdatePublisherVM)
+        Dim result As New Result(Of Object)
 
         Try
             Dim existingPublisher = publisherRepository.GetById(updatePublisherVM.Id).Result
@@ -92,17 +92,17 @@ Public Class PublisherService
                 _unitOfWork.CommitAsync().Wait()
                 result.Success = True
             Else
-                result.Errors.Add("Publisher not found.")
+                result.Errors.Add("Yayınevi bulunamadı.")
             End If
         Catch ex As Exception
             result.Success = False
             result.Errors.Add(ex.Message)
         End Try
 
-        Return result
+        Return result.Data
     End Function
 
-    Public Function DeletePublisher(publisherId As Long) As Result(Of Object) Implements IPublisherService.DeletePublisher
+    Public Function DeletePublisher(publisherId As Long) As Result(Of Integer) Implements IPublisherService.DeletePublisher
         Dim publisherRepository = _unitOfWork.GetRepository(Of Publisher)()
         Dim result As New Result(Of Object)
 
@@ -114,13 +114,13 @@ Public Class PublisherService
                 _unitOfWork.CommitAsync().Wait()
                 result.Success = True
             Else
-                result.Errors.Add("Publisher not found.")
+                result.Errors.Add("Yayınevi bulunamadı.")
             End If
         Catch ex As Exception
             result.Success = False
             result.Errors.Add(ex.Message)
         End Try
 
-        Return result
+        Return result.Data
     End Function
 End Class

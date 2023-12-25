@@ -19,13 +19,14 @@ Public Class BookService
             result.Data = books.Select(Function(book) New BookDTO With {
                 .Id = book.Id,
                 .BookName = book.BookName,
+                .AuthorFirstName = book.Author.FirstName,
+                .AuthorLastName = book.Author.LastName,
                 .Page = book.Page,
                 .Detail = book.Detail,
                 .IsRead = book.IsRead,
                 .CategoryName = book.Category.Name,
                 .PublisherName = book.Publisher.Name,
-                .AuthorName = book.Author.LastName,
-                .ReleaseDate = book.Year.Year
+                .IntDate = book.Year.IntDate
             }).ToList()
 
             result.Success = True
@@ -37,28 +38,20 @@ Public Class BookService
         Return result
     End Function
 
-    Public Function AddBook(addBookVM As AddBookVM) As Result(Of AddBookVM) Implements IBookService.AddBook
+    Public Function AddBook(addBookVM As AddBookVM) As Result(Of Integer) Implements IBookService.AddBook
         Dim bookRepository = _unitOfWork.GetRepository(Of Book)()
-        Dim result As New Result(Of AddBookVM)
+        Dim result As New Result(Of Object)
 
         Try
             Dim newBook As New Book With {
                 .BookName = addBookVM.BookName,
                 .Page = addBookVM.Page,
-                .Year = New Year With {
-                    .Year = addBookVM.ReleaseDate
-                 },
-                .Category = New Category With {
-                .Name = addBookVM.CategoryName
-                 },
+                .YearId = addBookVM.YearId,
+                .CategoryId = addBookVM.CategoryId,
                 .Detail = addBookVM.Detail,
                 .IsRead = addBookVM.IsRead,
-                .Author = New Author With {
-                    .LastName = addBookVM.AuthorName
-                },
-                .Publisher = New Publisher With {
-                            .Name = addBookVM.PublisherName
-                }
+                .AuthorId = addBookVM.AuthorId,
+                .PublisherId = addBookVM.PublisherId
             }
 
             bookRepository.Add(newBook)
@@ -69,25 +62,24 @@ Public Class BookService
             result.Errors.Add(ex.Message)
         End Try
 
-        Return result
+        Return result.Data
     End Function
 
-    Public Async Function UpdateBook(vM As UpdateBookVM) As Task(Of Result(Of UpdateBookVM)) Implements IBookService.UpdateBook
+    Public Async Function UpdateBook(updateBookVM As UpdateBookVM) As Task(Of Result(Of Integer)) Implements IBookService.UpdateBook
         Dim bookRepository = _unitOfWork.GetRepository(Of Book)()
-        Dim result As New Result(Of UpdateBookVM)
+        Dim result As New Result(Of Object)
 
         Try
-            Dim existingBook = Await bookRepository.GetById(vM.Id)
+            Dim existingBook = Await bookRepository.GetById(updateBookVM.Id)
 
             If existingBook IsNot Nothing Then
-                existingBook.BookName = vM.BookName
-                existingBook.Page = vM.Page
-                existingBook.Year.Year = vM.ReleaseDate
-                existingBook.Category.Name = vM.CategoryName
-                existingBook.Detail = vM.Detail
-                existingBook.IsRead = vM.IsRead
-                existingBook.Publisher.Name = vM.PublisherName
-                existingBook.Author.LastName = vM.AuthorName
+                existingBook.BookName = updateBookVM.BookName
+                existingBook.Page = updateBookVM.Page
+                existingBook.Detail = updateBookVM.Detail
+                existingBook.IsRead = updateBookVM.IsRead
+                existingBook.PublisherId = updateBookVM.PublisherId
+                existingBook.AuthorId = updateBookVM.AuthorId
+                existingBook.CategoryId = updateBookVM.CategoryId
 
                 bookRepository.Update(existingBook)
                 Await _unitOfWork.CommitAsync()
@@ -100,10 +92,10 @@ Public Class BookService
             result.Errors.Add(ex.Message)
         End Try
 
-        Return result
+        Return result.Data
     End Function
 
-    Public Function DeleteBook(bookId As Long) As Result(Of Object) Implements IBookService.DeleteBook
+    Public Function DeleteBook(bookId As Long) As Result(Of Integer) Implements IBookService.DeleteBook
         Dim bookRepository = _unitOfWork.GetRepository(Of Book)()
         Dim result As New Result(Of Object)
 
@@ -122,7 +114,7 @@ Public Class BookService
             result.Errors.Add(ex.Message)
         End Try
 
-        Return result
+        Return result.Data
     End Function
 
     Public Async Function GetBookById(bookId As Long) As Task(Of Result(Of BookDTO)) Implements IBookService.GetBookById
@@ -130,19 +122,20 @@ Public Class BookService
         Dim result As New Result(Of BookDTO)
 
         Try
-            Dim book = Await bookRepository.GetById(bookId)
+            Dim book = Await bookRepository.GetSingleByFilterAsync(Function(e) e.Id = bookId, {"Author", "Category", "Year", "Publisher"})
 
             If book IsNot Nothing Then
                 result.Data = New BookDTO With {
                     .Id = book.Id,
                     .BookName = book.BookName,
+                    .AuthorFirstName = book.Author.FirstName,
+                    .AuthorLastName = book.Author.LastName,
                     .Page = book.Page,
-                    .CategoryName = If(book.Category IsNot Nothing, book.Category.Name, Nothing),
+                    .CategoryName = book.Category.Name,
                     .Detail = book.Detail,
                     .IsRead = book.IsRead,
-                    .PublisherName = If(book.Publisher IsNot Nothing, book.Publisher.Name, Nothing),
-                    .AuthorName = If(book.Author IsNot Nothing, book.Author.LastName, Nothing),
-                    .ReleaseDate = If(book.Year IsNot Nothing, book.Year.Year, Nothing)
+                    .PublisherName = book.Publisher.Name,
+                    .IntDate = book.Year.IntDate
                 }
                 result.Success = True
             Else
@@ -162,18 +155,19 @@ Public Class BookService
         Dim result As New Result(Of List(Of BookDTO))
 
         Try
-            Dim books = Await bookRepository.GetByFilterAsync(Function(book) book.Category.Name = categoryId, "Author", "Category", "Publisher")
+            Dim books = Await bookRepository.GetByFilterAsync(Function(book) book.Category.Id = categoryId, "Author", "Category", "Year", "Publisher")
 
             result.Data = books.Select(Function(book) New BookDTO With {
                 .Id = book.Id,
                 .BookName = book.BookName,
+                .AuthorFirstName = book.Author.FirstName,
+                .AuthorLastName = book.Author.LastName,
                 .Page = book.Page,
                 .CategoryName = book.Category.Name,
                 .Detail = book.Detail,
                 .IsRead = book.IsRead,
                 .PublisherName = book.Publisher.Name,
-                .AuthorName = book.Author.LastName,
-                .ReleaseDate = book.Year.Year
+                .IntDate = book.Year.IntDate
             }).ToList()
 
             result.Success = True
@@ -190,17 +184,19 @@ Public Class BookService
         Dim result As New Result(Of List(Of BookDTO))
 
         Try
-            Dim books = Await bookRepository.GetByFilterAsync(Function(book) book.Author.LastName = authorId, "Author", "Category", "Publisher")
+            Dim books = Await bookRepository.GetByFilterAsync(Function(book) book.Author.Id = authorId, "Author", "Category", "Publisher", "Year")
 
             result.Data = books.Select(Function(book) New BookDTO With {
                 .Id = book.Id,
                 .BookName = book.BookName,
+                .AuthorFirstName = book.Author.FirstName,
+                .AuthorLastName = book.Author.LastName,
                 .Page = book.Page,
                 .CategoryName = book.Category.Name,
                 .Detail = book.Detail,
                 .IsRead = book.IsRead,
                 .PublisherName = book.Publisher.Name,
-                .AuthorName = book.Author.LastName
+                .IntDate = book.Year.IntDate
             }).ToList()
 
             result.Success = True
@@ -217,17 +213,19 @@ Public Class BookService
         Dim result As New Result(Of List(Of BookDTO))
 
         Try
-            Dim books = Await bookRepository.GetByFilterAsync(Function(book) book.Publisher.Name = publisherId, "Author", "Category", "Publisher")
+            Dim books = Await bookRepository.GetByFilterAsync(Function(book) book.Publisher.Id = publisherId, "Author", "Category", "Publisher", "Year")
 
             result.Data = books.Select(Function(book) New BookDTO With {
                 .Id = book.Id,
                 .BookName = book.BookName,
+                .AuthorFirstName = book.Author.FirstName,
+                .AuthorLastName = book.Author.LastName,
                 .Page = book.Page,
                 .CategoryName = book.Category.Name,
                 .Detail = book.Detail,
                 .IsRead = book.IsRead,
                 .PublisherName = book.Publisher.Name,
-                .AuthorName = book.Author.LastName
+                .IntDate = book.Year.IntDate
             }).ToList()
 
             result.Success = True

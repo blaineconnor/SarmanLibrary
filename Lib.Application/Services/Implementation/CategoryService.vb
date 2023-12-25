@@ -44,7 +44,7 @@ Public Class CategoryService
                 }
                 result.Success = True
             Else
-                result.Errors.Add("Category not found.")
+                result.Errors.Add("Kategori bulunamadı.")
             End If
         Catch ex As Exception
             result.Success = False
@@ -54,9 +54,9 @@ Public Class CategoryService
         Return result
     End Function
 
-    Public Function CreateCategory(createCategoryVM As CreateCategoryVM) As Result(Of CreateCategoryVM) Implements ICategoryService.CreateCategory
+    Public Function CreateCategory(createCategoryVM As CreateCategoryVM) As Result(Of Integer) Implements ICategoryService.CreateCategory
         Dim categoryRepository = _unitOfWork.GetRepository(Of Category)()
-        Dim result As New Result(Of CreateCategoryVM)
+        Dim result As New Result(Of Object)
 
         Try
             Dim newCategory As New Category With {
@@ -71,12 +71,12 @@ Public Class CategoryService
             result.Errors.Add(ex.Message)
         End Try
 
-        Return result
+        Return result.Data
     End Function
 
-    Public Function UpdateCategory(updateCategoryVM As UpdateCategoryVM) As Result(Of UpdateCategoryVM) Implements ICategoryService.UpdateCategory
+    Public Function UpdateCategory(updateCategoryVM As UpdateCategoryVM) As Result(Of Integer) Implements ICategoryService.UpdateCategory
         Dim categoryRepository = _unitOfWork.GetRepository(Of Category)()
-        Dim result As New Result(Of UpdateCategoryVM)
+        Dim result As New Result(Of Object)
 
         Try
             Dim existingCategory = categoryRepository.GetById(updateCategoryVM.Id).Result
@@ -88,17 +88,17 @@ Public Class CategoryService
                 _unitOfWork.CommitAsync().Wait()
                 result.Success = True
             Else
-                result.Errors.Add("Category not found.")
+                result.Errors.Add("Kategori bulunamadı.")
             End If
         Catch ex As Exception
             result.Success = False
             result.Errors.Add(ex.Message)
         End Try
 
-        Return result
+        Return result.Data
     End Function
 
-    Public Function DeleteCategory(categoryId As Long) As Result(Of Object) Implements ICategoryService.DeleteCategory
+    Public Function DeleteCategory(categoryId As Long) As Result(Of Integer) Implements ICategoryService.DeleteCategory
         Dim categoryRepository = _unitOfWork.GetRepository(Of Category)()
         Dim result As New Result(Of Object)
 
@@ -110,13 +110,13 @@ Public Class CategoryService
                 _unitOfWork.CommitAsync().Wait()
                 result.Success = True
             Else
-                result.Errors.Add("Category not found.")
+                result.Errors.Add("Kategori bulunamadı.")
             End If
         Catch ex As Exception
             result.Success = False
             result.Errors.Add(ex.Message)
         End Try
 
-        Return result
+        Return result.Data
     End Function
 End Class

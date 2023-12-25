@@ -19,8 +19,8 @@ Public Class PublisherController
     End Function
 
     <HttpGet("{publisherId}")>
-    Public Async Function GetPublisherById(publisherId As Long) As Task(Of ActionResult(Of PublisherDTO))
-        Dim publisher = Await _publisherService.GetPublisherById(publisherId)
+    Public Async Function GetPublisherById(getPublisherByIdVM As Long) As Task(Of ActionResult(Of PublisherDTO))
+        Dim publisher = Await _publisherService.GetPublisherById(getPublisherByIdVM)
         If publisher IsNot Nothing Then
             Return Ok(publisher)
         End If

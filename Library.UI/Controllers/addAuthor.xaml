@@ -44,7 +44,7 @@
 
                     </Border>
 
-                    <Button x:Name="CloseWindow" Click="CloseWindow_Click" Grid.Column="0" Grid.Row="4" Margin="10,10,10,10" BorderBrush="#00ABABAB" Cursor="Hand">
+                    <Button x:Name="CloseWindow" Grid.Column="0" Grid.Row="4" Margin="10,10,10,10" BorderBrush="#00ABABAB" Cursor="Hand">
                         <Button.Background>
                             <ImageBrush ImageSource="/Controllers/Close.png"/>
                         </Button.Background>

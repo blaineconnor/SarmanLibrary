@@ -5,7 +5,9 @@
     Public Property Detail As String
     Public Property IsRead As Boolean
     Public Property CategoryName As String
+    Public Property IntDate As Integer
     Public Property PublisherName As String
-    Public Property AuthorName As String
-    Public Property ReleaseDate As Integer
+    Public Property AuthorFirstName As String
+    Public Property AuthorLastName As String
+
 End Class
